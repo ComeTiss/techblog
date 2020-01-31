@@ -10,4 +10,4 @@ jobs:
         steps:
             - checkout
             - run: npm install
-            - run: npm test
+            - run: echo "No tests to run for now! :)"
