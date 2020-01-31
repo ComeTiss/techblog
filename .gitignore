@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-.tsconfig.json
+/src/react-app-env.d.ts
 # testing
 /coverage
 # production
