@@ -9,5 +9,4 @@ jobs:
             - image: circleci/node:7.10
         steps:
             - checkout
-            - run: npm install
             - run: echo "No tests to run for now! :)"
