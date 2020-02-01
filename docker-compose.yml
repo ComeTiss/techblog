@@ -6,10 +6,10 @@ services:
         container_name: reactapp
         build:
             context: .
-            dockerfile: Dockerfile
+            dockerfile: _infra/Dockerfile
         volumes:
-            - '.:/app'
-            - '/app/node_modules'
+            - './frontend:/frontend'
+            - '/frontend/node_modules'
         ports: 
             - '8000:3000'
         environment:
