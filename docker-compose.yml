@@ -8,8 +8,8 @@ services:
             context: .
             dockerfile: _infra/Dockerfile
         volumes:
-            - './frontend:/frontend'
-            - '/frontend/node_modules'
+            - '.:/app'
+            - '/app/node_modules'
         ports: 
             - '8000:3000'
         environment:
