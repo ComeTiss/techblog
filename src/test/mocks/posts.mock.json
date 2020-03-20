@@ -1,0 +1,24 @@
+{
+  "errors": [],
+  "data": {
+    "getAllPosts": [
+      {
+        "id": "4",
+        "title": "updated post",
+        "description": "updated post description"
+      },
+      {
+        "id": "5",
+        "title": "updated post",
+        "description": "updated post description"
+      },
+      {
+        "id": "6",
+        "title": "updated post",
+        "description": "updated post description"
+      }
+    ]
+  },
+  "extensions": null,
+  "dataPresent": true
+}
