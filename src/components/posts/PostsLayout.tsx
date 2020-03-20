@@ -3,8 +3,8 @@ import PostsList from "./PostsList";
 import { makeStyles } from "@material-ui/core/styles";
 import { Fab } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import mockData from "../../test/mocks/posts.mock.json";
 import MutatePostModal from "./MutatePostModal";
+import Post from "../../service/models/posts.model";
 
 const useStyles = makeStyles(() => ({
   postLayout__container: {
@@ -20,9 +20,13 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-function PostsLayout() {
+type Props = {
+  posts: Array<Post>;
+};
+
+function PostsLayout(props: Props) {
   const styles = useStyles();
-  const posts = mockData.data.getAllPosts;
+  const { posts } = props;
 
   const [displayModal, setDisplayModal] = useState<boolean>(false);
 
