@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   makeStyles,
@@ -7,6 +7,9 @@ import {
   Button,
   Typography
 } from "@material-ui/core";
+import { useMutation } from "@apollo/react-hooks";
+import Post from "../../service/models/posts.model";
+import { MUTATE_POST } from "../../service/apollo/mutations";
 
 type Props = {
   onClose: () => void;
@@ -36,9 +39,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 function MutatePostModal(props: Props) {
   const { onClose } = props;
   const styles = useStyles();
-
+  const [postDraft, setPostDraft] = useState<Post>(new Post({}));
+  const [mutatePost, { data }] = useMutation(MUTATE_POST);
+  console.log(data);
   const onClickSubmit = () => {
-    console.log("Submit press");
+    console.log(postDraft);
+    mutatePost({ variables: { postTitle: "title" } })
+      .then(() => {
+        onClose();
+      })
+      .catch((error) => { console.error(error) });
+  };
+  const onChangeTitle = (e: any) => {
+    setPostDraft({ ...postDraft, title: e.target.value });
+  };
+  const onChangeDescription = (e: any) => {
+    setPostDraft({ ...postDraft, description: e.target.value });
   };
 
   return (
@@ -59,6 +75,7 @@ function MutatePostModal(props: Props) {
             id="title-input"
             label="Required"
             placeholder="Title"
+            onChange={onChangeTitle}
           />
         </div>
         <TextField
@@ -67,6 +84,7 @@ function MutatePostModal(props: Props) {
           id="description-input"
           label="Required"
           placeholder="Description"
+          onChange={onChangeDescription}
         />
         <div className={styles.mutateModal__btnSubmit}>
           <Button
