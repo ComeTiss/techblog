@@ -5,6 +5,10 @@ import Adapter from "enzyme-adapter-react-16";
 import { MockedProvider } from "@apollo/react-testing";
 import { GET_ALL_POSTS } from "../../service/apollo/queries";
 import mockPosts from "../mocks/posts.mock.json";
+import {
+  DELETE_POSTS_BY_IDS,
+  MUTATE_POST
+} from "../../service/apollo/mutations";
 
 configure({ adapter: new Adapter() });
 
@@ -12,6 +16,22 @@ const mocks = [
   {
     request: {
       query: GET_ALL_POSTS
+    },
+    result: {
+      data: mockPosts.data
+    }
+  },
+  {
+    request: {
+      query: DELETE_POSTS_BY_IDS
+    },
+    result: {
+      data: mockPosts.data
+    }
+  },
+  {
+    request: {
+      query: MUTATE_POST
     },
     result: {
       data: mockPosts.data
