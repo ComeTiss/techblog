@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const MUTATE_POST = gql`
-  mutation MutatePost($input: PostInput!) {
-    mutatePost(post: $input) {
+  mutation MutatePost($post: PostInput!) {
+    mutatePost(post: $post) {
       id
       title
       description
@@ -11,8 +11,8 @@ export const MUTATE_POST = gql`
 `;
 
 export const DELETE_POSTS_BY_IDS = gql`
-  mutation DeletePostsByIds($postsIds: [ID]!) {
-    deletePostsByIds(ids: $postsIds) {
+  mutation DeletePostsByIds($ids: [ID]!) {
+    deletePostsByIds(ids: $ids) {
       id
       title
       description

@@ -10,6 +10,7 @@ import {
 import { useMutation } from "@apollo/react-hooks";
 import Post from "../../service/models/posts.model";
 import { MUTATE_POST } from "../../service/apollo/mutations";
+import { GET_ALL_POSTS } from "../../service/apollo/queries";
 
 type Props = {
   onClose: () => void;
@@ -44,7 +45,10 @@ function MutatePostModal(props: Props) {
 
   const onClickSubmit = () => {
     console.log(postDraft);
-    mutatePost({ variables: { postTitle: "title" } })
+    mutatePost({
+      variables: { post: postDraft },
+      refetchQueries: [{ query: GET_ALL_POSTS }]
+    })
       .then(() => {
         onClose();
       })
