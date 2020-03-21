@@ -40,8 +40,8 @@ function MutatePostModal(props: Props) {
   const { onClose } = props;
   const styles = useStyles();
   const [postDraft, setPostDraft] = useState<Post>(new Post({}));
-  const [mutatePost, { data }] = useMutation(MUTATE_POST);
-  //  console.log(data);
+  const [mutatePost] = useMutation(MUTATE_POST);
+
   const onClickSubmit = () => {
     console.log(postDraft);
     mutatePost({ variables: { postTitle: "title" } })
