@@ -9,4 +9,4 @@ jobs:
             - image: circleci/node:7.10
         steps:
             - checkout
-            - run: npm run test
+            - run: npm test
