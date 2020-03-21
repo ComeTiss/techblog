@@ -27,6 +27,7 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
+        "no-unused-vars": "warn",
         "prettier/prettier": ["error"],
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-empty-function": "off"
