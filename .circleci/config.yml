@@ -24,4 +24,4 @@ jobs:
                 command: npm run lint
             - run:
                 name: Build production
-                command: npm run build && npm start
+                command: npm run build
