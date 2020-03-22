@@ -6,6 +6,8 @@ import AddIcon from "@material-ui/icons/Add";
 import MutatePostModal from "./MutatePostModal";
 import Post from "../../service/models/posts.model";
 
+const CREATE_POST_MODAL_TITLE= "Create a Post";
+
 const useStyles = makeStyles(() => ({
   postLayout__container: {
     margin: "auto",
@@ -47,7 +49,10 @@ function PostsLayout(props: Props) {
         </span>
       </div>
       {displayModal && (
-        <MutatePostModal onClose={() => setDisplayModal(false)} />
+        <MutatePostModal
+          modalTitle={CREATE_POST_MODAL_TITLE}
+          onClose={() => setDisplayModal(false)}
+        />
       )}
     </>
   );

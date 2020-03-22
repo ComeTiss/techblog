@@ -13,6 +13,8 @@ import { MUTATE_POST } from "../../service/apollo/mutations";
 import { GET_ALL_POSTS } from "../../service/apollo/queries";
 
 type Props = {
+  modalTitle: string;
+  prefilledPost?: Post;
   onClose: () => void;
 };
 
@@ -38,9 +40,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 function MutatePostModal(props: Props) {
-  const { onClose } = props;
+  const { onClose, prefilledPost, modalTitle } = props;
   const styles = useStyles();
-  const [postDraft, setPostDraft] = useState<Post>(new Post({}));
+  const [postDraft, setPostDraft] = useState<Post>(
+    new Post(prefilledPost || {})
+  );
   const [mutatePost] = useMutation(MUTATE_POST);
 
   const onClickSubmit = () => {
@@ -73,7 +77,7 @@ function MutatePostModal(props: Props) {
       onClose={onClose}
     >
       <div className={styles.mutateModal__container}>
-        <Typography variant="h5">Create a Post</Typography>
+        <Typography variant="h5">{modalTitle}</Typography>
 
         <div className={styles.mutateModal__titleInput}>
           <TextField
@@ -81,6 +85,7 @@ function MutatePostModal(props: Props) {
             id="title-input"
             label="Required"
             placeholder="Title"
+            value={postDraft.title}
             onChange={onChangeTitle}
           />
         </div>
@@ -90,6 +95,7 @@ function MutatePostModal(props: Props) {
           id="description-input"
           label="Required"
           placeholder="Description"
+          value={postDraft.description}
           onChange={onChangeDescription}
         />
         <div className={styles.mutateModal__btnSubmit}>
