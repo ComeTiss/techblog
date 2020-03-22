@@ -7,4 +7,3 @@ const ENV = process.env.NODE_ENV;
 export const client = new ApolloClient({
   uri: ENV !== "production" ? URI_DEV : URI_PROD
 });
-console.log(ENV);
