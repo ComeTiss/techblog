@@ -23,5 +23,5 @@ jobs:
                 name: ESLINT
                 command: npm run lint
             - run:
-                name: Testing production version
-                command: npm run build && serve -s build
+                name: Build production
+                command: npm run build && npm start
