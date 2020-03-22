@@ -6,7 +6,7 @@ import AddIcon from "@material-ui/icons/Add";
 import MutatePostModal from "./MutatePostModal";
 import Post from "../../service/models/posts.model";
 
-const CREATE_POST_MODAL_TITLE= "Create a Post";
+const CREATE_POST_MODAL_TITLE = "Create a Post";
 
 const useStyles = makeStyles(() => ({
   postLayout__container: {
