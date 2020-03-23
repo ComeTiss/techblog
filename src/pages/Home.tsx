@@ -13,9 +13,9 @@ const useStyles = makeStyles(() => ({
 
 function Home() {
   const styles = useStyles();
-  const { data, error } = useQuery(GET_ALL_POSTS);
+  const { data } = useQuery(GET_ALL_POSTS);
   // Handle Error, loading
-  console.error(data);
+
   const posts = data?.getAllPosts?.posts || [];
 
   return (
