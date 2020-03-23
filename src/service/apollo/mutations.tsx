@@ -1,21 +1,28 @@
 import gql from "graphql-tag";
+import { PostFragment } from "./fragments";
 
 export const MUTATE_POST = gql`
-  mutation MutatePost($post: PostInput!) {
+  mutation MutatePost($post: MutatePostRequest!) {
     mutatePost(post: $post) {
-      id
-      title
-      description
+      error
+      success
+      post {
+        ...PostItem
+      }
     }
   }
+  ${PostFragment.post}
 `;
 
 export const DELETE_POSTS_BY_IDS = gql`
   mutation DeletePostsByIds($ids: [ID]!) {
     deletePostsByIds(ids: $ids) {
-      id
-      title
-      description
+      error
+      success
+      posts {
+        ...PostItem
+      }
     }
   }
+  ${PostFragment.post}
 `;

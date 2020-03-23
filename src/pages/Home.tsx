@@ -15,8 +15,8 @@ function Home() {
   const styles = useStyles();
   const { data, error } = useQuery(GET_ALL_POSTS);
   // Handle Error, loading
-  console.error(error);
-  const posts = data?.getAllPosts || [];
+  console.error(data);
+  const posts = data?.getAllPosts?.posts || [];
 
   return (
     <div>
