@@ -1,24 +1,38 @@
 {
-  "errors": [],
   "data": {
-    "getAllPosts": [
-      {
-        "id": "4",
-        "title": "updated post",
-        "description": "updated post description"
-      },
-      {
-        "id": "5",
-        "title": "updated post",
-        "description": "updated post description"
-      },
-      {
-        "id": "6",
-        "title": "updated post",
-        "description": "updated post description"
-      }
-    ]
-  },
-  "extensions": null,
-  "dataPresent": true
+    "getAllPosts": {
+      "success": true,
+      "error": null,
+      "posts": [
+        {
+          "id": "28",
+          "title": "This post was updated",
+          "description": "...",
+          "createdAt": "2020-03-22T15:46:47.354001Z",
+          "updatedAt": null
+        },
+        {
+          "id": "29",
+          "title": "This post was updated",
+          "description": "...",
+          "createdAt": "2020-03-22T15:48:15.480209Z",
+          "updatedAt": null
+        },
+        {
+          "id": "31",
+          "title": "This post was updated",
+          "description": "...",
+          "createdAt": "2020-03-22T15:49:17.363361Z",
+          "updatedAt": null
+        },
+        {
+          "id": "35",
+          "title": "This post was updated",
+          "description": "...",
+          "createdAt": "2020-03-22T17:01:07.539400Z",
+          "updatedAt": null
+        }
+      ]
+    }
+  }
 }
