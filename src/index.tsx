@@ -1,15 +1,5 @@
 import React from "react";
 import { render } from "react-dom";
-import Home from "./pages/Home";
-import { client } from "./service/apollo/client";
-import { ApolloProvider } from "@apollo/react-hooks";
-
-function App() {
-  return (
-    <ApolloProvider client={client}>
-      <Home />
-    </ApolloProvider>
-  );
-}
+import App from "./components/App";
 
 render(<App />, document.getElementById("root"));
