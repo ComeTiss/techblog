@@ -2,7 +2,7 @@
 
 2 ways:
 * Docker: run bash script **startapp.sh**
-* Manualy: run **npm install**, then **npm start**
+* Manualy: run **npm install**, then **npm start** or **npm run start:dev** (locally)
 
 ## CI Checks
 
