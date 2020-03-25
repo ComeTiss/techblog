@@ -9,4 +9,4 @@
 1) Run jest tests
 2) Run eslint
 > If you can encounter an error, you can run **npm run lint** or **npm run lint:fix**
-3) Test the production the build
+3) Test the production build
