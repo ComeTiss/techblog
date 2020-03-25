@@ -10,7 +10,9 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <Switch>
-          {routes.map(route => <Route {...route}/>)}
+          {routes.map(route => (
+            <Route {...route} key={route.name} />
+          ))}
         </Switch>
       </Router>
     </ApolloProvider>

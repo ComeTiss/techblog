@@ -9,7 +9,8 @@
     "start": "serve -s build",
     "test": "jest",
     "test:watch": "jest --watch",
-    "lint": "eslint \"**/*.tsx\" --ignore-pattern node_modules/"
+    "lint": "eslint \"**/*.tsx\" --ignore-pattern node_modules/",
+    "lint:fix": "eslint \"**/*.tsx\" --ignore-pattern node_modules/ --fix"
   },
   "repository": {
     "type": "git",
