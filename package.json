@@ -60,7 +60,8 @@
     "save": "^2.4.0",
     "serve": "^11.3.0",
     "ts-jest": "^25.2.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "universal-cookie": "^4.0.3"
   },
   "browserslist": {
     "production": [

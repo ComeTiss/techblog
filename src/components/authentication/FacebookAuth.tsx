@@ -2,7 +2,7 @@ import React from "react";
 import FacebookLogin from "react-facebook-login";
 
 type Props = {
-  onLoginSuccess: () => void;
+  onLoginSuccess: (data: any) => void;
   onLoginFailure: () => void;
 };
 
@@ -15,6 +15,7 @@ function FacebookAuth(props: Props) {
       callback={onLoginSuccess}
       onFailure={onLoginFailure}
       size="medium"
+      cookie={true}
     />
   );
 }

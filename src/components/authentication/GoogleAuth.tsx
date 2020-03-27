@@ -2,7 +2,7 @@ import React from "react";
 import GoogleLogin from "react-google-login";
 
 type Props = {
-  onLoginSuccess: () => void;
+  onLoginSuccess: (data: any) => void;
   onLoginFailure: () => void;
 };
 
