@@ -1,18 +1,14 @@
 import React from "react";
 import AuthenticationLayout from "../components/authentication/AuthenticationLayout";
 
-function Login() {
+function Signup() {
   const onSubmit = () => {
     console.log("press submit");
   };
 
   return (
-    <AuthenticationLayout
-      title="Login"
-      confirmPassword={false}
-      onSubmit={onSubmit}
-    />
+    <AuthenticationLayout title="Signup" confirmPassword onSubmit={onSubmit} />
   );
 }
 
-export default Login;
+export default Signup;

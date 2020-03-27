@@ -1,8 +1,16 @@
 import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import Login from "../pages/Login";
+import Signup from "../pages/Signup";
 
 const routes = [
+  {
+    path: "/signup",
+    name: "signup",
+    exact: true,
+    protected: false,
+    component: Signup
+  },
   {
     path: "/login",
     name: "login",
