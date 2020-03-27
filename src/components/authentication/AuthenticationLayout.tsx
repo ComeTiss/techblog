@@ -18,10 +18,16 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+export type AuthenticationData = {
+  email: string;
+  password: string;
+  passwordConfirm?: string;
+};
+
 type Props = {
   title: string;
   confirmPassword: boolean;
-  onSubmit: () => void;
+  onSubmit: (data: AuthenticationData) => void;
 };
 
 function Login(props: Props) {

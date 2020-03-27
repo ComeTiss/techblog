@@ -26,3 +26,31 @@ export const DELETE_POSTS_BY_IDS = gql`
   }
   ${PostFragment.post}
 `;
+
+export const SIGNUP = gql`
+  mutation Signup($request: SignUpRequest!) {
+    signup(request: $request) {
+      error
+      user {
+        id
+        email
+        authProvider
+      }
+      token
+    }
+  }
+`;
+
+export const LOGIN = gql`
+  mutation Login($request: LoginRequest!) {
+    login(request: $request) {
+      error
+      user {
+        id
+        email
+        authProvider
+      }
+      token
+    }
+  }
+`;

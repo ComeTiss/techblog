@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Typography,
   makeStyles,
@@ -8,11 +8,12 @@ import {
 } from "@material-ui/core";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import { AuthenticationData } from "./AuthenticationLayout";
 
 type Props = {
   title: string;
   confirmPassword: boolean;
-  onClickSubmit: () => void;
+  onClickSubmit: (data: AuthenticationData) => void;
 };
 
 const useStyles = makeStyles(() => ({
@@ -37,6 +38,18 @@ const useStyles = makeStyles(() => ({
 function ManualAuth(props: Props) {
   const { title, confirmPassword, onClickSubmit } = props;
   const styles = useStyles();
+  const [inputData, setInputData] = useState<AuthenticationData>({
+    email: "",
+    password: "",
+    passwordConfirm: ""
+  });
+
+  const onChangeData = (field: string, e: any) => {
+    const newData = { ...inputData };
+    // @ts-ignore
+    newData[field] = e.target.value;
+    setInputData(newData);
+  };
 
   return (
     <div>
@@ -54,6 +67,7 @@ function ManualAuth(props: Props) {
             id="email-input"
             label="Email adress"
             placeholder="Email adress"
+            onChange={(e: any) => onChangeData("email", e)}
           />
         </div>
         <TextField
@@ -63,6 +77,7 @@ function ManualAuth(props: Props) {
           id="password-input"
           label="Password"
           placeholder="Password"
+          onChange={(e: any) => onChangeData("password", e)}
         />
         {confirmPassword && (
           <div className={styles.manualAuh__confirmPwd}>
@@ -73,6 +88,7 @@ function ManualAuth(props: Props) {
               id="password-confirm-input"
               label="Confirm password"
               placeholder="Confirmation"
+              onChange={(e: any) => onChangeData("passwordConfirm", e)}
             />
           </div>
         )}
@@ -82,7 +98,7 @@ function ManualAuth(props: Props) {
             color="primary"
             component="span"
             fullWidth
-            onClick={onClickSubmit}
+            onClick={() => onClickSubmit(inputData)}
           >
             Submit
           </Button>

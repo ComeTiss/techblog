@@ -1,9 +1,18 @@
 import React from "react";
-import AuthenticationLayout from "../components/authentication/AuthenticationLayout";
+import AuthenticationLayout, {
+  AuthenticationData
+} from "../components/authentication/AuthenticationLayout";
+import { SIGNUP } from "../service/apollo/mutations";
+import { useMutation } from "@apollo/react-hooks";
 
 function Signup() {
-  const onSubmit = () => {
-    console.log("press submit");
+  const [signup] = useMutation(SIGNUP);
+
+  const onSubmit = (data: AuthenticationData) => {
+    const { email, password } = data;
+    signup({
+      variables: { request: { email, password } }
+    });
   };
 
   return (
