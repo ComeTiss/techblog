@@ -14,6 +14,7 @@ type Props = {
   title: string;
   confirmPassword: boolean;
   onClickSubmit: (data: AuthenticationData) => void;
+  submitError: string;
 };
 
 const useStyles = makeStyles(() => ({
@@ -30,13 +31,18 @@ const useStyles = makeStyles(() => ({
     margin: "auto",
     marginBottom: 8
   },
-  manualAuh__confirmPwd: {
+  manualAuth__confirmPwd: {
     marginTop: 20
+  },
+  manualAuth_errorMsg: {
+    marginTop: 8,
+    color: "red",
+    fontWeight: "bold"
   }
 }));
 
 function ManualAuth(props: Props) {
-  const { title, confirmPassword, onClickSubmit } = props;
+  const { submitError, title, confirmPassword, onClickSubmit } = props;
   const styles = useStyles();
   const [inputData, setInputData] = useState<AuthenticationData>({
     email: "",
@@ -80,7 +86,7 @@ function ManualAuth(props: Props) {
           onChange={(e: any) => onChangeData("password", e)}
         />
         {confirmPassword && (
-          <div className={styles.manualAuh__confirmPwd}>
+          <div className={styles.manualAuth__confirmPwd}>
             <TextField
               variant="outlined"
               required
@@ -91,6 +97,14 @@ function ManualAuth(props: Props) {
               onChange={(e: any) => onChangeData("passwordConfirm", e)}
             />
           </div>
+        )}
+        {submitError && !!submitError.trim() && (
+          <Typography
+            variant="subtitle1"
+            className={styles.manualAuth_errorMsg}
+          >
+            {submitError}
+          </Typography>
         )}
         <div className={styles.manualAuth__submitBtn}>
           <Button

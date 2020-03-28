@@ -4,6 +4,7 @@ import GoogleAuth from "./GoogleAuth";
 import { makeStyles, Container } from "@material-ui/core";
 import { Redirect } from "react-router-dom";
 import ManualAuth from "./ManualAuth";
+import { ExecutionResult } from "graphql";
 //import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles(() => ({
@@ -27,13 +28,25 @@ export type AuthenticationData = {
 type Props = {
   title: string;
   confirmPassword: boolean;
-  onSubmit: (data: AuthenticationData) => void;
+  onSubmit: (data: AuthenticationData) => Promise<void | ExecutionResult<any>>;
 };
 
 function Login(props: Props) {
   const { title, confirmPassword, onSubmit } = props;
   const styles = useStyles();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+
+  const onSubmitManualAuth = (data: AuthenticationData) => {
+    onSubmit(data)
+      .then(() => {
+        setIsLoggedIn(true);
+      })
+      .catch(error => {
+        const errorJSON = JSON.parse(JSON.stringify(error));
+        setError(errorJSON?.networkError?.result?.message);
+      });
+  };
 
   const onLoginSuccess = (data: any) => {
     console.log(data);
@@ -52,9 +65,10 @@ function Login(props: Props) {
         <Container component="main" maxWidth="xs">
           <div className={styles.loginPage__mainContainer}>
             <ManualAuth
+              submitError={error}
               title={title}
               confirmPassword={confirmPassword}
-              onClickSubmit={onSubmit}
+              onClickSubmit={onSubmitManualAuth}
             />
             <div className={styles.loginPage__button}>
               <FacebookAuth

@@ -10,9 +10,11 @@ function Signup() {
 
   const onSubmit = (data: AuthenticationData) => {
     const { email, password } = data;
-    signup({
-      variables: { request: { email, password } }
-    });
+    return Promise.resolve(
+      signup({
+        variables: { request: { email, password } }
+      })
+    );
   };
 
   return (
