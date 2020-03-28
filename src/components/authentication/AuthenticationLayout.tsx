@@ -38,6 +38,10 @@ function Login(props: Props) {
   const [error, setError] = useState<string>("");
 
   const onSubmitManualAuth = (data: AuthenticationData) => {
+    if (!isPasswordValid(data)) {
+      setError("Invalid password confirmation");
+      return;
+    }
     onSubmit(data)
       .then(() => {
         setIsLoggedIn(true);
@@ -55,6 +59,11 @@ function Login(props: Props) {
 
   const onLoginFailure = () => {
     setIsLoggedIn(false);
+  };
+
+  const isPasswordValid = (data: AuthenticationData) => {
+    const { password, passwordConfirm } = data;
+    return !passwordConfirm || password === passwordConfirm;
   };
 
   return (
