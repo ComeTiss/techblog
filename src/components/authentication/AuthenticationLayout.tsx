@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import ManualAuth from "./ManualAuth";
 import { ExecutionResult } from "graphql";
 //import Divider from "@material-ui/core/Divider";
+import cookies, { useCookies } from "react-cookie";
 
 const useStyles = makeStyles(() => ({
   loginPage__button: {
@@ -36,6 +37,7 @@ function Login(props: Props) {
   const styles = useStyles();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const [cookies, setCookies] = useCookies(["token"]);
 
   const onSubmitManualAuth = (data: AuthenticationData) => {
     if (!isEmailValid(data)) {
@@ -58,6 +60,7 @@ function Login(props: Props) {
 
   const onLoginSuccess = (data: any) => {
     console.log(data);
+    setCookies("token", data?.accessToken);
     setIsLoggedIn(true);
   };
 
