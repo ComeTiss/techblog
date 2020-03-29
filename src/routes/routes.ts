@@ -2,6 +2,7 @@ import Home from "../pages/Home";
 import NotFound from "../pages/NotFound";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import Logout from "../pages/Logout";
 
 const routes = [
   {
@@ -17,6 +18,13 @@ const routes = [
     exact: true,
     protected: false,
     component: Login
+  },
+  {
+    path: "/logout",
+    name: "logout",
+    exact: true,
+    protected: false,
+    component: Logout
   },
   {
     path: "/",

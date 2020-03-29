@@ -5,10 +5,11 @@ import AuthenticationLayout, {
 import { useMutation } from "@apollo/react-hooks";
 import { LOGIN } from "../service/apollo/mutations";
 import { useCookies } from "react-cookie";
+import Navigation from "../components/routes/Navigation";
 
 function Login() {
   const [login] = useMutation(LOGIN);
-  const [cookies, setCookies] = useCookies(["token"]);
+  const [cookies, setCookies] = useCookies();
 
   const onSubmit = (data: AuthenticationData) => {
     const { email, password } = data;
@@ -16,17 +17,21 @@ function Login() {
       login({
         variables: { request: { email, password } }
       }).then(response => {
+        setCookies("userId", response?.data?.login?.user?.id);
         setCookies("token", response?.data?.login?.token);
       })
     );
   };
 
   return (
-    <AuthenticationLayout
-      title="Login"
-      confirmPassword={false}
-      onSubmit={onSubmit}
-    />
+    <>
+      <Navigation linkPath="/signup" linkTitle="Sign Up" />
+      <AuthenticationLayout
+        title="Login"
+        confirmPassword={false}
+        onSubmit={onSubmit}
+      />
+    </>
   );
 }
 

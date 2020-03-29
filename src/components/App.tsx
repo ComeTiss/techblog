@@ -5,21 +5,39 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router";
 import routes from "../routes/routes";
 import ProtectedRoute from "./routes/ProtectedRoute";
+import store from "../store/store";
+import { Provider } from "react-redux";
+import { useCookies } from "react-cookie";
 
-const Routes = routes.map(route =>
-  route.protected ? (
-    <ProtectedRoute isUserLoggedIn={true} route={route} key={route.name} />
-  ) : (
-    <Route {...route} key={route.name} />
-  )
-);
+function isUserLoggedIn(cookies: any) {
+  const userId: number = +cookies["userId"];
+  return !!userId;
+}
+
+const Routes = (cookies: any) => {
+  return routes.map(route =>
+    route.protected ? (
+      <ProtectedRoute
+        isUserLoggedIn={isUserLoggedIn(cookies)}
+        route={route}
+        key={route.name}
+      />
+    ) : (
+      <Route {...route} key={route.name} />
+    )
+  );
+};
 
 function App() {
+  const [cookies, setCookies] = useCookies(["token"]);
+
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <Switch>{Routes}</Switch>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <Switch>{Routes(cookies)}</Switch>
+        </Router>
+      </Provider>
     </ApolloProvider>
   );
 }

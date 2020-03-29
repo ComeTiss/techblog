@@ -5,6 +5,7 @@ import AuthenticationLayout, {
 import { SIGNUP } from "../service/apollo/mutations";
 import { useMutation } from "@apollo/react-hooks";
 import { useCookies } from "react-cookie";
+import Navigation from "../components/routes/Navigation";
 
 function Signup() {
   const [signup] = useMutation(SIGNUP);
@@ -16,13 +17,21 @@ function Signup() {
       signup({
         variables: { request: { email, password } }
       }).then(response => {
+        setCookies("userId", response?.data?.signup?.user?.id);
         setCookies("token", response?.data?.signup?.token);
       })
     );
   };
 
   return (
-    <AuthenticationLayout title="Signup" confirmPassword onSubmit={onSubmit} />
+    <>
+      <Navigation linkPath="/login" linkTitle="Login" />
+      <AuthenticationLayout
+        title="Signup"
+        confirmPassword
+        onSubmit={onSubmit}
+      />
+    </>
   );
 }
 
