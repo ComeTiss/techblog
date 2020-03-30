@@ -4,7 +4,7 @@ import PostsLayout from "../components/posts/PostsLayout";
 import { useQuery } from "@apollo/react-hooks";
 import { GET_ALL_POSTS } from "../service/apollo/queries";
 import Navigation from "../components/routes/Navigation";
-import store from "../store/store";
+import { useCookies } from "react-cookie";
 
 const useStyles = makeStyles(() => ({
   homePage__title: {
@@ -18,12 +18,14 @@ function Home() {
   const { data } = useQuery(GET_ALL_POSTS);
   // Handle Error, loading
   const posts = data?.getAllPosts?.posts || [];
+  const [cookies] = useCookies();
+  const userId = cookies["userId"];
 
   return (
     <div>
       <Navigation linkPath="/logout" linkTitle="Logout" />
       <h1 className={styles.homePage__title}>The Tech-Blog</h1>
-      <PostsLayout posts={posts} />
+      <PostsLayout userId={userId} posts={posts} />
     </div>
   );
 }

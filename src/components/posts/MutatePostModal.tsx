@@ -50,7 +50,7 @@ function MutatePostModal(props: Props) {
   const onClickSubmit = () => {
     console.log(postDraft);
     mutatePost({
-      variables: { post: postDraft },
+      variables: { request: postDraft },
       refetchQueries: [{ query: GET_ALL_POSTS }]
     })
       .then(() => {

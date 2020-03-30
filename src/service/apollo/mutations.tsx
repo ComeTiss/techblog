@@ -2,8 +2,8 @@ import gql from "graphql-tag";
 import { PostFragment } from "./fragments";
 
 export const MUTATE_POST = gql`
-  mutation MutatePost($post: MutatePostRequest!) {
-    mutatePost(post: $post) {
+  mutation MutatePost($request: MutatePostRequest!) {
+    mutatePost(request: $request) {
       error
       success
       post {

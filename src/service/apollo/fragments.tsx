@@ -8,6 +8,9 @@ export const PostFragment = {
       description
       createdAt
       updatedAt
+      author {
+        id
+      }
     }
   `
 };

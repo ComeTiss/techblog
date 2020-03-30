@@ -23,12 +23,13 @@ const useStyles = makeStyles(() => ({
 }));
 
 type Props = {
+  userId: string;
   posts: Array<Post>;
 };
 
 function PostsLayout(props: Props) {
   const styles = useStyles();
-  const { posts } = props;
+  const { posts, userId } = props;
 
   const [displayModal, setDisplayModal] = useState<boolean>(false);
 
@@ -50,6 +51,7 @@ function PostsLayout(props: Props) {
       </div>
       {displayModal && (
         <MutatePostModal
+          prefilledPost={new Post({ authorId: userId })}
           modalTitle={CREATE_POST_MODAL_TITLE}
           onClose={() => setDisplayModal(false)}
         />
