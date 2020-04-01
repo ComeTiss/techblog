@@ -1,17 +1,17 @@
-import { ActionTypes, UPDATE_USER_ID, UserID } from "./actions";
+import { ActionTypes, UPDATE_FILTERS_POSTS, FiltersPosts } from "./actions";
 
 type State = {
-  userId: UserID;
+  filtersPosts: FiltersPosts;
 };
 
 const defaultState: State = {
-  userId: null
+  filtersPosts: null
 };
 
 function reducer(state = defaultState, action: ActionTypes) {
   switch (action.type) {
-    case UPDATE_USER_ID:
-      return { userId: action.payload.userId };
+    case UPDATE_FILTERS_POSTS:
+      return { filtersPosts: action.payload.filtersPosts };
     default:
       return state;
   }

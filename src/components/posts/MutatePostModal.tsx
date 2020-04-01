@@ -10,7 +10,8 @@ import {
 import { useMutation } from "@apollo/react-hooks";
 import Post from "../../service/models/posts.model";
 import { MUTATE_POST } from "../../service/apollo/mutations";
-import { GET_ALL_POSTS } from "../../service/apollo/queries";
+import { GET_POSTS } from "../../service/apollo/queries";
+import store from "../../store/store";
 
 type Props = {
   modalTitle: string;
@@ -48,10 +49,12 @@ function MutatePostModal(props: Props) {
   const [mutatePost] = useMutation(MUTATE_POST);
 
   const onClickSubmit = () => {
-    console.log(postDraft);
+    const filters = store.getState().filtersPosts;
     mutatePost({
       variables: { request: postDraft },
-      refetchQueries: [{ query: GET_ALL_POSTS }]
+      refetchQueries: [
+        { query: GET_POSTS, variables: { request: { filters } } }
+      ]
     })
       .then(() => {
         onClose();

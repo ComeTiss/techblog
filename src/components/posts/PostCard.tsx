@@ -12,8 +12,9 @@ import ClearIcon from "@material-ui/icons/Clear";
 import EditIcon from "@material-ui/icons/Edit";
 import { DELETE_POSTS_BY_IDS } from "../../service/apollo/mutations";
 import { useMutation } from "@apollo/react-hooks";
-import { GET_ALL_POSTS } from "../../service/apollo/queries";
+import { GET_POSTS } from "../../service/apollo/queries";
 import MutatePostModal from "./MutatePostModal";
+import store from "../../store/store";
 
 type Props = {
   post: Post;
@@ -32,14 +33,22 @@ const useStyles = makeStyles(() => ({
 
 function PostCard(props: Props) {
   const { post } = props;
+  const { id: postId, title, description, authorId } = post;
   const styles = useStyles();
   const [displayModal, setDisplayModal] = useState<boolean>(false);
   const [deletePost] = useMutation(DELETE_POSTS_BY_IDS);
+  const Author = authorId ? `User ${authorId}` : "Anonymous";
 
   const onClickClearBtn = () => {
+    const filters = store.getState().filtersPosts;
     deletePost({
-      variables: { ids: [String(post.id)] },
-      refetchQueries: [{ query: GET_ALL_POSTS }]
+      variables: { ids: [String(postId)] },
+      refetchQueries: [
+        {
+          query: GET_POSTS,
+          variables: { request: { filters } }
+        }
+      ]
     })
       .then(() => {})
       .catch(() => {});
@@ -63,12 +72,13 @@ function PostCard(props: Props) {
         }
         title={
           <Typography variant="h6" className={styles.postCard__title}>
-            {post.title}
+            {title}
           </Typography>
         }
+        subheader={<Typography variant="caption">author: {Author}</Typography>}
       />
       <CardContent>
-        <Typography variant="subtitle1">{post.description}</Typography>
+        <Typography variant="subtitle1">{description}</Typography>
       </CardContent>
       {displayModal && (
         <MutatePostModal

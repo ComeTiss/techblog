@@ -12,7 +12,7 @@ function PostsList(props: Props) {
   return (
     <>
       {posts.map((post: Post) => (
-        <PostCard key={post.id} post={post} />
+        <PostCard key={post.id} post={new Post(post)} />
       ))}
     </>
   );

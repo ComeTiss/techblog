@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PostsList from "./PostsList";
 import { makeStyles } from "@material-ui/core/styles";
-import { Fab } from "@material-ui/core";
+import { Fab, Switch } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import MutatePostModal from "./MutatePostModal";
 import Post from "../../service/models/posts.model";
@@ -25,14 +25,20 @@ const useStyles = makeStyles(() => ({
 type Props = {
   userId: string;
   posts: Array<Post>;
+  setFilters: (withFilters: boolean) => void;
 };
 
 function PostsLayout(props: Props) {
   const styles = useStyles();
-  const { posts, userId } = props;
+  const { posts, userId, setFilters } = props;
 
   const [displayModal, setDisplayModal] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(false);
 
+  const handleChangeSwitch = () => {
+    setChecked(!checked);
+    setFilters(!checked);
+  };
   return (
     <>
       <div className={styles.postLayout__container}>
@@ -45,6 +51,12 @@ function PostsLayout(props: Props) {
             <AddIcon />
           </Fab>
         </span>
+        <Switch
+          checked={checked}
+          onChange={handleChangeSwitch}
+          color="primary"
+          name="filter-posts-switch"
+        />
         <span className={styles.postLayout__listContainer}>
           <PostsList posts={posts} />
         </span>

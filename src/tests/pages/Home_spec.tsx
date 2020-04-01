@@ -3,7 +3,7 @@ import Home from "../../pages/Home";
 import { shallow, configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { MockedProvider } from "@apollo/react-testing";
-import { GET_ALL_POSTS } from "../../service/apollo/queries";
+import { GET_POSTS } from "../../service/apollo/queries";
 import mockPosts from "../mocks/posts.mock.json";
 import {
   DELETE_POSTS_BY_IDS,
@@ -15,7 +15,8 @@ configure({ adapter: new Adapter() });
 const mocks = [
   {
     request: {
-      query: GET_ALL_POSTS
+      query: GET_POSTS,
+      variables: { request: {} }
     },
     result: {
       data: mockPosts.data

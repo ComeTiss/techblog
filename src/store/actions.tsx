@@ -1,19 +1,22 @@
-export const UPDATE_USER_ID = "UPDATE_USER_ID";
+export type ActionTypes = UpdateFiltersPostsAction;
 
-export type ActionTypes = UpdateUserIdAction;
+export type FiltersPosts = {
+  authorId: number;
+} | null;
 
-export type UserID = number | null;
-
-interface UpdateUserIdAction {
-  type: typeof UPDATE_USER_ID;
+export const UPDATE_FILTERS_POSTS = "UPDATE_FILTERS_POSTS";
+interface UpdateFiltersPostsAction {
+  type: typeof UPDATE_FILTERS_POSTS;
   payload: {
-    userId: UserID;
+    filtersPosts: FiltersPosts;
   };
 }
 
-export function updateUserId(userId: UserID): UpdateUserIdAction {
+export function updateFiltersPosts(
+  filtersPosts: FiltersPosts
+): UpdateFiltersPostsAction {
   return {
-    type: UPDATE_USER_ID,
-    payload: { userId }
+    type: UPDATE_FILTERS_POSTS,
+    payload: { filtersPosts }
   };
 }
