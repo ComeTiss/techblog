@@ -27,6 +27,38 @@ export const DELETE_POSTS_BY_IDS = gql`
   ${PostFragment.post}
 `;
 
+export const MUTATE_VOTE = gql`
+  mutation MutateVote($request: MutateVoteRequest!) {
+    mutateVote(request: $request) {
+      vote {
+        vote
+        post {
+          id
+        }
+        user {
+          id
+        }
+      }
+    }
+  }
+`;
+
+export const DELETE_VOTE = gql`
+  mutation DeleteVote($request: DeleteVoteRequest!) {
+    deleteVote(request: $request) {
+      vote {
+        vote
+        post {
+          id
+        }
+        user {
+          id
+        }
+      }
+    }
+  }
+`;
+
 export const SIGNUP = gql`
   mutation Signup($request: SignUpRequest!) {
     signup(request: $request) {

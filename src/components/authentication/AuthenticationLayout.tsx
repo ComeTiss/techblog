@@ -6,7 +6,8 @@ import { Redirect } from "react-router-dom";
 import ManualAuth from "./ManualAuth";
 import { ExecutionResult } from "graphql";
 //import Divider from "@material-ui/core/Divider";
-import cookies, { useCookies } from "react-cookie";
+import { AuthProvider } from "../../service/models/user.model";
+import { useCookies } from "react-cookie";
 
 const useStyles = makeStyles(() => ({
   loginPage__button: {
@@ -22,8 +23,9 @@ const useStyles = makeStyles(() => ({
 
 export type AuthenticationData = {
   email: string;
-  password: string;
+  password?: string;
   passwordConfirm?: string;
+  authProvider?: AuthProvider;
 };
 
 type Props = {
@@ -37,7 +39,7 @@ function Login(props: Props) {
   const styles = useStyles();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [cookies, setCookies] = useCookies(["token"]);
+  const [cookies, setCookies] = useCookies();
 
   const onSubmitManualAuth = (data: AuthenticationData) => {
     if (!isEmailValid(data)) {
@@ -58,10 +60,19 @@ function Login(props: Props) {
       });
   };
 
-  const onLoginSuccess = (data: any) => {
-    console.log(data);
-    setCookies("token", data?.accessToken);
-    setIsLoggedIn(true);
+  const onLoginSuccess = (data: any, authProvider: AuthProvider) => {
+    const dataAuth = {
+      email: data?.email || data?.profileObj?.email,
+      authProvider: authProvider
+    };
+    onSubmit(dataAuth)
+      .then(() => {
+        setCookies("token", data.access_token);
+        setIsLoggedIn(true);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   };
 
   const onLoginFailure = () => {
@@ -93,12 +104,16 @@ function Login(props: Props) {
             />
             <div className={styles.loginPage__button}>
               <FacebookAuth
-                onLoginSuccess={onLoginSuccess}
+                onLoginSuccess={(data: any) =>
+                  onLoginSuccess(data, AuthProvider.FACEBOOK)
+                }
                 onLoginFailure={onLoginFailure}
               />
             </div>
             <GoogleAuth
-              onLoginSuccess={onLoginSuccess}
+              onLoginSuccess={(data: any) =>
+                onLoginSuccess(data, AuthProvider.GOOGLE)
+              }
               onLoginFailure={onLoginFailure}
             />
           </div>

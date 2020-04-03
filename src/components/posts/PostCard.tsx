@@ -6,6 +6,7 @@ import {
   CardContent,
   makeStyles,
   CardHeader,
+  CardActions,
   IconButton
 } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
@@ -14,6 +15,7 @@ import { DELETE_POSTS_BY_IDS } from "../../service/apollo/mutations";
 import { useMutation } from "@apollo/react-hooks";
 import { GET_POSTS } from "../../service/apollo/queries";
 import MutatePostModal from "./MutatePostModal";
+import PostVoteContainer from "./PostVoteContainer";
 import store from "../../store/store";
 
 type Props = {
@@ -80,6 +82,9 @@ function PostCard(props: Props) {
       <CardContent>
         <Typography variant="subtitle1">{description}</Typography>
       </CardContent>
+      <CardActions>
+        <PostVoteContainer post={post} />
+      </CardActions>
       {displayModal && (
         <MutatePostModal
           modalTitle={EDIT_POST_MODAL_TITLE}

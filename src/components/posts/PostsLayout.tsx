@@ -39,6 +39,19 @@ function PostsLayout(props: Props) {
     setChecked(!checked);
     setFilters(!checked);
   };
+
+  const FilterSwitch = (
+    <>
+      {"Only my posts: "}
+      <Switch
+        checked={checked}
+        onChange={handleChangeSwitch}
+        color="primary"
+        name="filter-posts-switch"
+      />
+    </>
+  );
+
   return (
     <>
       <div className={styles.postLayout__container}>
@@ -51,12 +64,7 @@ function PostsLayout(props: Props) {
             <AddIcon />
           </Fab>
         </span>
-        <Switch
-          checked={checked}
-          onChange={handleChangeSwitch}
-          color="primary"
-          name="filter-posts-switch"
-        />
+        {FilterSwitch}
         <span className={styles.postLayout__listContainer}>
           <PostsList posts={posts} />
         </span>

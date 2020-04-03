@@ -6,19 +6,22 @@ import { useMutation } from "@apollo/react-hooks";
 import { LOGIN } from "../service/apollo/mutations";
 import { useCookies } from "react-cookie";
 import Navigation from "../components/routes/Navigation";
+import { AuthProvider } from "../service/models/user.model";
 
 function Login() {
   const [login] = useMutation(LOGIN);
   const [cookies, setCookies] = useCookies();
-
   const onSubmit = (data: AuthenticationData) => {
-    const { email, password } = data;
+    const { email, password, authProvider } = data;
+
     return Promise.resolve(
       login({
-        variables: { request: { email, password } }
+        variables: { request: { email, password, authProvider } }
       }).then(response => {
         setCookies("userId", response?.data?.login?.user?.id);
-        setCookies("token", response?.data?.login?.token);
+        if (!data.authProvider) {
+          setCookies("token", response?.data?.login?.token);
+        }
       })
     );
   };

@@ -8,6 +8,12 @@ export const PostFragment = {
       description
       createdAt
       updatedAt
+      votes {
+        vote
+        user {
+          id
+        }
+      }
       author {
         id
       }
