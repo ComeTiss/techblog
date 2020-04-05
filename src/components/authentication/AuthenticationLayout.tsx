@@ -42,10 +42,6 @@ function Login(props: Props) {
   const [cookies, setCookies] = useCookies();
 
   const onSubmitManualAuth = (data: AuthenticationData) => {
-    if (!isEmailValid(data)) {
-      setError("Invalid email format");
-      return;
-    }
     if (!isPasswordValid(data)) {
       setError("Invalid password confirmation");
       return;
@@ -81,11 +77,6 @@ function Login(props: Props) {
   const isPasswordValid = (data: AuthenticationData) => {
     const { password, passwordConfirm } = data;
     return !passwordConfirm || password === passwordConfirm;
-  };
-
-  const isEmailValid = (data: AuthenticationData) => {
-    const email = data.email.toLocaleLowerCase();
-    return /^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\.)+[A-Za-z]+$/.test(email);
   };
 
   return (

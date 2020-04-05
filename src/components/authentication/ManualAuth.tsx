@@ -37,7 +37,8 @@ const useStyles = makeStyles(() => ({
   manualAuth_errorMsg: {
     marginTop: 8,
     color: "red",
-    fontWeight: "bold"
+    fontWeight: "bold",
+    whiteSpace: "pre-line"
   }
 }));
 
