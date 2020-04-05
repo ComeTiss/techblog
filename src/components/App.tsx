@@ -30,9 +30,9 @@ const Routes = (cookies: any) => {
 
 function App() {
   const [cookies, setCookies] = useCookies(["token"]);
-
+  const clientApollo = client(cookies);
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={clientApollo}>
       <Provider store={store}>
         <Router>
           <Switch>{Routes(cookies)}</Switch>
