@@ -19,7 +19,7 @@ function Home() {
   const [filters, setFilters] = useState<any>(null);
   const styles = useStyles();
   const [cookies] = useCookies();
-  const { data, error } = useQuery(GET_POSTS, {
+  const { data } = useQuery(GET_POSTS, {
     fetchPolicy: "network-only",
     variables: { request: { filters } }
   });
